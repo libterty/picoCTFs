@@ -149,7 +149,7 @@ undefined4 checkFlag(char *userInput,uint encodedLen)
   return 0xffffffff;
 ```
 
-- The following function in assembly
+- The following function in assembly is the condition we need to meet
 
 ```assembly
                              LAB_00010978                                    XREF[1]:     000109a5(j)  
@@ -166,4 +166,26 @@ undefined4 checkFlag(char *userInput,uint encodedLen)
         00010992 c7 45 e8        MOV        dword ptr [EBP + -0x18],0xffffffff
                  ff ff ff ff
 
+```
+
+-- The following condition in assembly is the breakpoint
+
+```assembly
+        00010a71 50              PUSH       isFlag=>s_Correct!_00010b76                      = "Correct!"
+        00010a72 e8 a9 fa        CALL       puts                                             int puts(char * __s)
+                 ff ff
+
+```
+
+> equals to code 
+
+```c
+  if (isFlag == 1) {
+    puts("Correct!");
+  }
+```
+
+
+```bash
+gdb -n -q -ex "set pagination off" -ex "source easy_gdb.py" ~/Downloads/.brute
 ```
